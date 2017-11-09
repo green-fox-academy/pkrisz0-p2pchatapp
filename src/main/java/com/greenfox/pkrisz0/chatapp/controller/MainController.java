@@ -1,5 +1,6 @@
 package com.greenfox.pkrisz0.chatapp.controller;
 
+import com.greenfox.pkrisz0.chatapp.model.User;
 import com.greenfox.pkrisz0.chatapp.repository.ChatAppRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ public class MainController {
 
     @GetMapping({"", "/"})
     public String index(){
+        chatAppRepo.save(new User("krisz","12345"));
         return "main";
     }
 }

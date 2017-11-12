@@ -1,6 +1,7 @@
 package com.greenfox.pkrisz0.chatapp;
 
 import com.greenfox.pkrisz0.chatapp.repository.ChatAppRepo;
+import com.greenfox.pkrisz0.chatapp.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +12,9 @@ public class ChatappApplication implements CommandLineRunner {
 
 	@Autowired
 	ChatAppRepo chatAppRepo;
+
+	@Autowired
+	ChatService chatService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ChatappApplication.class, args);

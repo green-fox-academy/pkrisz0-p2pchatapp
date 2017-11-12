@@ -6,6 +6,8 @@ import com.greenfox.pkrisz0.chatapp.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
 
@@ -15,4 +17,9 @@ public class RestController {
     @Autowired
     ChatService chatService;
 
+    @GetMapping("/index")
+    public String index(HttpServletRequest request){
+        chatService.checkEnvironment(request);
+        return "P2P chatapp";
+    }
 }

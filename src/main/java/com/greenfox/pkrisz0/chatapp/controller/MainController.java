@@ -1,8 +1,9 @@
 package com.greenfox.pkrisz0.chatapp.controller;
 
-import com.greenfox.pkrisz0.chatapp.model.Log;
-import com.greenfox.pkrisz0.chatapp.model.User;
+import com.greenfox.pkrisz0.chatapp.model.ChatLog;
+import com.greenfox.pkrisz0.chatapp.model.ChatUser;
 import com.greenfox.pkrisz0.chatapp.repository.ChatAppRepo;
+import com.greenfox.pkrisz0.chatapp.repository.ChatLogRepo;
 import com.greenfox.pkrisz0.chatapp.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,13 @@ public class MainController {
     @Autowired
     ChatService chatService;
 
+    @Autowired
+    ChatLogRepo chatLogRepo;
+
     @GetMapping({"", "/"})
-    public String index(Model model, HttpServletRequest request){
-        chatAppRepo.save(new User("krisz","12345"));
-        model.addAttribute("user", chatAppRepo.findOne(1));
+    public String index(HttpServletRequest request){
         chatService.checkEnvironment(request);
+        chatLogRepo.save(new ChatLog(request));
         return "main";
     }
 }

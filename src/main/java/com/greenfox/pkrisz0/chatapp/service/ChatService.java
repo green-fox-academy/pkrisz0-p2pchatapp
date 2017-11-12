@@ -1,6 +1,6 @@
 package com.greenfox.pkrisz0.chatapp.service;
 
-import com.greenfox.pkrisz0.chatapp.model.Log;
+import com.greenfox.pkrisz0.chatapp.model.ChatLog;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +10,9 @@ public class ChatService {
 
     public void checkEnvironment(HttpServletRequest request){
         if (System.getenv("CHAT_APP_LOGLEVEL").equals("INFO")){
-            System.out.println(new Log(request));
+            System.out.println(new ChatLog(request));
         } else if (System.getenv("CHAT_APP_LOGLEVEL").equals("ERROR")){
-            System.err.println(new Log(request));
+            System.err.println(new ChatLog(request));
         }
     }
 }

@@ -5,9 +5,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Log {
+@Entity
+@Table(name="chatlogs")
+public class ChatLog {
 
 //    2017-05-16 21:47:19.040 INFO Request /message POST text=apple
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    int logId;
 
     String date;
     String level; //info vagy error
@@ -15,10 +21,10 @@ public class Log {
     String param;
     String path;
 
-    public Log() {
+    public ChatLog() {
     }
 
-    public Log(HttpServletRequest h) {
+    public ChatLog(HttpServletRequest h) {
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
         this.level = System.getenv("CHAT_APP_LOGLEVEL");
         this.method = h.getMethod();
@@ -70,5 +76,13 @@ public class Log {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public int getLogId() {
+        return logId;
+    }
+
+    public void setLogId(int logId) {
+        this.logId = logId;
     }
 }

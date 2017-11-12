@@ -4,21 +4,22 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="chatusers")
-public class User {
+public class ChatUser {
     String userName;
     String password;
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    int id;
+    int userId;
 
-    public User() {
+    public ChatUser() {
 
     }
 
-    public User(String userName, String password) {
+    public ChatUser(String userName, String password) {
         this.userName = userName;
         this.password = password;
+        int userId;
     }
 
 
@@ -39,10 +40,10 @@ public class User {
     }
 
     public int getId() {
-        return id;
+        return userId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.userId = id;
     }
 }

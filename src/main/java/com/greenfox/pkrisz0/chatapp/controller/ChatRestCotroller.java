@@ -22,7 +22,8 @@ public class ChatRestCotroller {
     @GetMapping(value="/index")
     public String index(HttpServletRequest request){
         chatService.checkEnvironment(request);
-        chatLogRepo.save(new ChatLog(request));
-        return new ChatLog(request).toString();
+        ChatLog something = new ChatLog(request);
+        chatLogRepo.save(something);
+        return something.toString();
     }
 }

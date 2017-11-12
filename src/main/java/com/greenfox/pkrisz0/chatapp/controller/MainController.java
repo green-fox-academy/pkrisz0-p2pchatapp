@@ -20,7 +20,7 @@ public class MainController {
     @Autowired
     ChatService chatService;
 
-    @GetMapping({"", "/index"})
+    @GetMapping({"", "/"})
     public String index(Model model, HttpServletRequest request){
         chatAppRepo.save(new User("krisz","12345"));
         model.addAttribute("user", chatAppRepo.findOne(1));

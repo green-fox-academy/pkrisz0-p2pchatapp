@@ -16,6 +16,8 @@ public class ChatappApplication implements CommandLineRunner {
 	@Autowired
 	ChatService chatService;
 
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(ChatappApplication.class, args);
 	}

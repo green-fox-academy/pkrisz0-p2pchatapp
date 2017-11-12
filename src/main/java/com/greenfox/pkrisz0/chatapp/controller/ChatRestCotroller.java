@@ -1,31 +1,28 @@
 package com.greenfox.pkrisz0.chatapp.controller;
 
+
 import com.greenfox.pkrisz0.chatapp.model.ChatLog;
-import com.greenfox.pkrisz0.chatapp.model.ChatUser;
-import com.greenfox.pkrisz0.chatapp.repository.ChatAppRepo;
 import com.greenfox.pkrisz0.chatapp.repository.ChatLogRepo;
 import com.greenfox.pkrisz0.chatapp.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
-public class MainController {
-
-    @Autowired
-    ChatAppRepo chatAppRepo;
-
-    @Autowired
-    ChatService chatService;
+@RestController
+public class ChatRestCotroller {
 
     @Autowired
     ChatLogRepo chatLogRepo;
 
-    @GetMapping({"", "/"})
-    public String index(){
-        return "main";
+    @Autowired
+    ChatService chatService;
+
+    @GetMapping(value="/index")
+    public String index(HttpServletRequest request){
+        chatService.checkEnvironment(request);
+        chatLogRepo.save(new ChatLog(request));
+        return new ChatLog(request).toString();
     }
 }

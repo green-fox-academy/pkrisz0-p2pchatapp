@@ -24,8 +24,11 @@ public class MainController {
     @GetMapping({"", "/"})
     public String index(HttpServletRequest request, Model model){
         chatService.checkEnvironment(request);
-        model.addAttribute("current", chatUserRepo.findOne(chatUserRepo.smallest()));
-        return "main";
+        if (chatUserRepo.findAllByIdIsGreaterThan(0).size() > 0){
+            model.addAttribute("current", chatUserRepo.findOne(chatUserRepo.smallest()));
+            return "redirect:/update";
+        } return "redirect:/enter";
+
     }
 
     @GetMapping("/enter")
@@ -59,9 +62,16 @@ public class MainController {
 
         if (current.getUserName().equals("")){
             model.addAttribute("error","Please enter a name for the user.");
-            return "main";
+            return "rename";
         }
         chatUserRepo.save(current);
         return "redirect:/";
+    }
+
+    @GetMapping("/update")
+    public String pointToUpdate(HttpServletRequest request, @ModelAttribute ChatUser current, Model model){
+        chatService.checkEnvironment(request);
+        model.addAttribute("current", chatUserRepo.findOne(chatUserRepo.smallest()));
+        return "rename";
     }
 }

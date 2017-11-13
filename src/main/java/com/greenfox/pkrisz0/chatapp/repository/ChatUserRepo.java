@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ChatUserRepo extends CrudRepository<ChatUser, Integer> {
             List<ChatUser> findChatUserByUserName(String name);
+            List<ChatUser> findAllByIdIsGreaterThan(int a);
 
             @Query(value="SELECT MIN(id) FROM chatusers", nativeQuery = true)
             Integer smallest();

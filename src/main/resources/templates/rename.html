@@ -9,7 +9,7 @@
 <h1>Peer to peer chat program</h1>
 <form th:action="@{/update}" method="post" th:object="${current}">
     <input type="hidden" th:field="${current.id}"/>
-    <input type="text" value="title" th:field="*{userName}"/>
+    Your username <input type="text" th:field="*{userName}"/>
     <button type="submit">Update</button>
     <span th:if="${error}" th:text="${error}"/>
 </form>

@@ -1,19 +1,12 @@
 package com.greenfox.pkrisz0.chatapp.model;
 
-import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Entity
-@Table(name="chatlogs")
 public class ChatLog {
 
 //    2017-05-16 21:47:19.040 INFO Request /message POST text=apple
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    int logId;
 
     String date;
     String level; //info vagy error
@@ -78,11 +71,4 @@ public class ChatLog {
         this.path = path;
     }
 
-    public int getLogId() {
-        return logId;
-    }
-
-    public void setLogId(int logId) {
-        this.logId = logId;
-    }
 }

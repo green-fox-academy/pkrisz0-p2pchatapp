@@ -5,21 +5,16 @@ import javax.persistence.*;
 @Entity
 @Table(name="chatusers")
 public class ChatUser {
-    String userName;
-    String password;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    int userId;
+    String userName;
 
     public ChatUser() {
 
     }
 
-    public ChatUser(String userName, String password) {
+    public ChatUser(String userName) {
         this.userName = userName;
-        this.password = password;
-        int userId;
     }
 
 
@@ -31,19 +26,4 @@ public class ChatUser {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getId() {
-        return userId;
-    }
-
-    public void setId(int id) {
-        this.userId = id;
-    }
 }

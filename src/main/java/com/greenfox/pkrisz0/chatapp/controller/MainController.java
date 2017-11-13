@@ -2,6 +2,7 @@ package com.greenfox.pkrisz0.chatapp.controller;
 
 import com.greenfox.pkrisz0.chatapp.model.ChatUser;
 import com.greenfox.pkrisz0.chatapp.repository.ChatUserRepo;
+import com.greenfox.pkrisz0.chatapp.repository.MessageRepo;
 import com.greenfox.pkrisz0.chatapp.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.size;
+
 @Controller
 public class MainController {
 
@@ -21,14 +24,19 @@ public class MainController {
     @Autowired
     ChatService chatService;
 
+    @Autowired
+    MessageRepo messageRepo;
+
     @GetMapping({"", "/"})
     public String index(HttpServletRequest request, Model model){
         chatService.checkEnvironment(request);
+        if (size(messageRepo.findAll())>0){
+            model.addAttribute("messages", messageRepo.findAll());
+        }
         if (chatUserRepo.findAllByIdIsGreaterThan(0).size() > 0){
             model.addAttribute("current", chatUserRepo.findOne(chatUserRepo.smallest()));
-            return "redirect:/update";
+            return "main";
         } return "redirect:/enter";
-
     }
 
     @GetMapping("/enter")
@@ -37,7 +45,6 @@ public class MainController {
         model.addAttribute("chatuser", new ChatUser());
         return "enter";
     }
-
 
     @PostMapping("/save")
     public String save(HttpServletRequest request, @ModelAttribute ChatUser chatuser, Model model){
@@ -62,16 +69,9 @@ public class MainController {
 
         if (current.getUserName().equals("")){
             model.addAttribute("error","Please enter a name for the user.");
-            return "rename";
+            return "main";
         }
         chatUserRepo.save(current);
         return "redirect:/";
-    }
-
-    @GetMapping("/update")
-    public String pointToUpdate(HttpServletRequest request, @ModelAttribute ChatUser current, Model model){
-        chatService.checkEnvironment(request);
-        model.addAttribute("current", chatUserRepo.findOne(chatUserRepo.smallest()));
-        return "rename";
     }
 }

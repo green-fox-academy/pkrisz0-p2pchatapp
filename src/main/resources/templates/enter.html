@@ -8,9 +8,9 @@
 
     <h1>Enter</h1>
     <form th:action="@{/save}" method="post" th:object="${chatuser}">
-        <span th:if="${error}" th:text="${error}"/>
         <input type="text" value="title" th:field="*{userName}" placeholder=" Name of User"/>
     <button type="submit">Enter</button>
+        <span th:if="${error}" th:text="${error}"/>
     </form>
 </body>
 </html>

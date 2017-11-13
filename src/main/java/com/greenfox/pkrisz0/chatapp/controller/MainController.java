@@ -22,8 +22,9 @@ public class MainController {
     ChatService chatService;
 
     @GetMapping({"", "/"})
-    public String index(HttpServletRequest request){
+    public String index(HttpServletRequest request, Model model){
         chatService.checkEnvironment(request);
+        model.addAttribute("current", chatUserRepo.findOne(chatUserRepo.smallest()));
         return "main";
     }
 
@@ -42,9 +43,25 @@ public class MainController {
         if (chatUserRepo.findChatUserByUserName(chatuser.getUserName()).size() > 0){
             model.addAttribute("error","User with this name already exists.");
             return "enter";
+        } else if (chatuser.getUserName().equals("")){
+            model.addAttribute("errorTwo","Please enter a name for the user.");
+            return "enter";
         } else {
             chatUserRepo.save(chatuser);
             return "redirect:/";
         }
+    }
+
+    @PostMapping("/update")
+    public String saveNewName(HttpServletRequest request, @ModelAttribute ChatUser current, Model model){
+        chatService.checkEnvironment(request);
+        model.addAttribute("current", chatUserRepo.findOne(chatUserRepo.smallest()));
+
+        if (current.getUserName().equals("")){
+            model.addAttribute("error","Please enter a name for the user.");
+            return "main";
+        }
+        chatUserRepo.save(current);
+        return "redirect:/";
     }
 }

@@ -11,6 +11,7 @@
         <input type="text" value="title" th:field="*{userName}" placeholder=" Name of User"/>
     <button type="submit">Enter</button>
         <span th:if="${error}" th:text="${error}"/>
+        <span th:if="${errorTwo}" th:text="${errorTwo}"/>
     </form>
 </body>
 </html>

@@ -7,14 +7,18 @@ import javax.persistence.*;
 public class ChatUser {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    int id;
+
     String userName;
 
     public ChatUser() {
-
+     int id;
     }
 
     public ChatUser(String userName) {
         this.userName = userName;
+        int id;
     }
 
 
@@ -26,4 +30,11 @@ public class ChatUser {
         this.userName = userName;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

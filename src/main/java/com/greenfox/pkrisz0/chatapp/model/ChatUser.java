@@ -1,6 +1,7 @@
 package com.greenfox.pkrisz0.chatapp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="chatusers")
@@ -13,12 +14,10 @@ public class ChatUser {
     String userName;
 
     public ChatUser() {
-     int id;
     }
 
     public ChatUser(String userName) {
         this.userName = userName;
-        int id;
     }
 
 

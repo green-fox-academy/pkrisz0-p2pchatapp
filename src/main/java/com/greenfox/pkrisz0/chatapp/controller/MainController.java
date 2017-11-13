@@ -1,6 +1,7 @@
 package com.greenfox.pkrisz0.chatapp.controller;
 
 import com.greenfox.pkrisz0.chatapp.model.ChatUser;
+import com.greenfox.pkrisz0.chatapp.model.Message;
 import com.greenfox.pkrisz0.chatapp.repository.ChatUserRepo;
 import com.greenfox.pkrisz0.chatapp.repository.MessageRepo;
 import com.greenfox.pkrisz0.chatapp.service.ChatService;
@@ -30,6 +31,7 @@ public class MainController {
     @GetMapping({"", "/"})
     public String index(HttpServletRequest request, Model model){
         chatService.checkEnvironment(request);
+        model.addAttribute("message", new Message());
         if (size(messageRepo.findAll())>0){
             model.addAttribute("messages", messageRepo.findAll());
         }
@@ -72,6 +74,15 @@ public class MainController {
             return "main";
         }
         chatUserRepo.save(current);
+        return "redirect:/";
+    }
+
+    @PostMapping("/savemessage")
+    public String saveNewMessage(HttpServletRequest request, @ModelAttribute Message message, Model model){
+        chatService.checkEnvironment(request);
+        model.addAttribute("message", new Message());
+        message.setUserName(chatUserRepo.findOne(chatUserRepo.smallest()).getUserName());
+        messageRepo.save(message);
         return "redirect:/";
     }
 }

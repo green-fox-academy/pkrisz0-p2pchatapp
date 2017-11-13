@@ -1,8 +1,9 @@
 package com.greenfox.pkrisz0.chatapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.greenfox.pkrisz0.chatapp.repository.ChatUserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -16,10 +17,12 @@ public class Message {
     int messageId;
 
     public Message() {
+        this.userName = "Anonymous";
+        this.messageId = randomId();
     }
 
-    public Message(String userName, String text) {
-        this.userName = userName;
+    public Message(String text) {
+        this.userName = "Anonymous";
         this.text = text;
         this.timestamp = new Timestamp(System.currentTimeMillis());
         this.messageId = randomId();

@@ -23,8 +23,8 @@
     <li th:utext="${message.userName} + '&lt;br /&gt;' + ${message.text}" />
 </ul>
 
-<form>
-    <textarea rows="4" cols="50"/>
+<form th:action="@{/savemessage}" method="post" th:object="${message}">
+    <textarea rows="4" cols="50" th:field="*{text}"/>
     <br></br>
     <button type="submit">Sumbit Message</button>
 </form>

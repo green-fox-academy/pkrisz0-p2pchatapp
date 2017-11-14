@@ -31,6 +31,7 @@ public class ChatRestCotroller {
         chatService.checkEnvironment(request);
     }
 
+    @CrossOrigin("*")
     @PostMapping(value = "/api/message/receive")
     public Object getsMessage(@RequestBody ToBeRecieved toBeRecieved, HttpServletRequest request){
         chatService.checkEnvironment(request);

@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.codehaus.groovy.runtime.DefaultGroovyMethods.size;
 
 @Controller
@@ -81,7 +85,9 @@ public class MainController {
     public String saveNewMessage(HttpServletRequest request, @ModelAttribute Message message, Model model){
         chatService.checkEnvironment(request);
         model.addAttribute("message", new Message());
-        message.setUserName(chatUserRepo.findOne(chatUserRepo.smallest()).getUserName());
+        message.setUsername(chatUserRepo.findOne(chatUserRepo.smallest()).getUserName());
+        message.setId(message.randomId());
+        message.setTimestamp(new Timestamp(System.currentTimeMillis()));
         messageRepo.save(message);
         return "redirect:/";
     }

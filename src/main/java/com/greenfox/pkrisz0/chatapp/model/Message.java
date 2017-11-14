@@ -1,43 +1,40 @@
 package com.greenfox.pkrisz0.chatapp.model;
 
-import com.greenfox.pkrisz0.chatapp.repository.ChatUserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "messages")
 public class Message {
-    String userName;
+    String username;
     String text;
     Timestamp timestamp;
 
     @Id
-    int messageId;
+    Integer id;
 
     public Message() {
-        this.userName = "Anonymous";
-        this.messageId = randomId();
+
     }
 
-    public Message(String text) {
-        this.userName = "Anonymous";
+    public Message(String username, String text, Timestamp timestamp, Integer id) {
+        this.username = username;
         this.text = text;
-        this.timestamp = new Timestamp(System.currentTimeMillis());
-        this.messageId = randomId();
+        this.timestamp = timestamp;
+        this.id = randomId();
     }
 
-    public int randomId(){
+
+    public Integer randomId(){
         return (int)(Math.random() * 9999999 + 1000000);
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getText() {
@@ -56,11 +53,11 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    public int getMessageId() {
-        return messageId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

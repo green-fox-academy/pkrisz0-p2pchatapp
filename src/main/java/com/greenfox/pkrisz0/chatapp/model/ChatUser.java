@@ -20,7 +20,6 @@ public class ChatUser {
         this.userName = userName;
     }
 
-
     public String getUserName() {
         return userName;
     }

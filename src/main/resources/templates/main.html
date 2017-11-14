@@ -20,7 +20,7 @@
 </ul>
 
 <ul th:each="message:${messages}">
-    <li th:utext="${message.userName} + '&lt;br /&gt;' + ${message.text}" />
+    <li th:utext="${message.username} + '&lt;br /&gt;' + ${message.text}" />
 </ul>
 
 <form th:action="@{/savemessage}" method="post" th:object="${message}">

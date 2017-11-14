@@ -1,16 +1,17 @@
 package com.greenfox.pkrisz0.chatapp.controller;
 
-import com.greenfox.pkrisz0.chatapp.model.ChatUser;
-import com.greenfox.pkrisz0.chatapp.model.Message;
+import com.greenfox.pkrisz0.chatapp.model.*;
 import com.greenfox.pkrisz0.chatapp.repository.ChatUserRepo;
 import com.greenfox.pkrisz0.chatapp.repository.MessageRepo;
 import com.greenfox.pkrisz0.chatapp.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -80,6 +81,17 @@ public class MainController {
         chatUserRepo.save(current);
         return "redirect:/";
     }
+
+//    @PostMapping(value="/savemessage")
+//    public String saveNewMessage(HttpServletRequest request, @ModelAttribute Message message, Model model, @RequestBody ToBeRecieved toBeRecieved){
+//        chatService.checkEnvironment(request);
+//        model.addAttribute("message", new Message());
+//        message.setUsername(System.getenv("CHATAPP_UNIQUE_ID"));
+//        message.setId(message.randomId());
+//        message.setTimestamp(new Timestamp(System.currentTimeMillis()));
+//        chatService.sendMessage(new ToBeRecieved(new Client(System.getenv("CHATAPP_UNIQUE_ID")),message));
+//        return "redirect:/";
+//    }
 
     @PostMapping("/savemessage")
     public String saveNewMessage(HttpServletRequest request, @ModelAttribute Message message, Model model){

@@ -1,5 +1,8 @@
 package com.greenfox.pkrisz0.chatapp.model;
 
+
+
+
 public class ToBeRecieved {
     Client client;
     Message message;

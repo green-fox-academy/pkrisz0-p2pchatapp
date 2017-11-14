@@ -1,8 +1,10 @@
 package com.greenfox.pkrisz0.chatapp.service;
 
 import com.greenfox.pkrisz0.chatapp.model.ChatLog;
+import com.greenfox.pkrisz0.chatapp.model.Status;
 import com.greenfox.pkrisz0.chatapp.model.ToBeRecieved;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,5 +42,10 @@ public class ChatService {
             sb.append("client.id");
         }
         return sb.toString();
+    }
+
+    public void sendMessage(ToBeRecieved toBeRecieved){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForObject("http://localhost:8080/api/message/receive",toBeRecieved,Status.class);
     }
 }

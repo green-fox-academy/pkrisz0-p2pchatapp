@@ -33,9 +33,7 @@ public class ChatService {
         } if (toBeRecieved.getMessage().getTimestamp() == null){
             sb.append(", ");
             sb.append("message.timestamp");
-        } if (toBeRecieved.getMessage().getId() == null ||
-                toBeRecieved.getMessage().getId() < 1000000 ||
-                toBeRecieved.getMessage().getId() > 9999999){
+        } if (toBeRecieved.getMessage().getId() == null ){
             sb.append(", ");
             sb.append("message.messageId");
         }  if (toBeRecieved.getClient() == null || toBeRecieved.getClient().getId() == null  || toBeRecieved.getClient().getId().isEmpty()) {

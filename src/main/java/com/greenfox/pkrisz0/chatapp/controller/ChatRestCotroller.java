@@ -36,7 +36,7 @@ public class ChatRestCotroller {
         chatService.checkEnvironment(request);
         if (chatService.checkFields(toBeRecieved).equals("")){
             messageRepo.save(toBeRecieved.getMessage());
-            return "status : ok";
+            return "{\"status\": \"ok\"}";
         }
         else {
             return new ResponseEntity(new Status("error", "Missing field(s):" + chatService.checkFields(toBeRecieved)), HttpStatus.BAD_REQUEST);

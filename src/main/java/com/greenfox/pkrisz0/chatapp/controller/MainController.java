@@ -82,25 +82,26 @@ public class MainController {
         return "redirect:/";
     }
 
-//    @PostMapping(value="/savemessage")
-//    public String saveNewMessage(HttpServletRequest request, @ModelAttribute Message message, Model model, @RequestBody ToBeRecieved toBeRecieved){
-//        chatService.checkEnvironment(request);
-//        model.addAttribute("message", new Message());
-//        message.setUsername(System.getenv("CHATAPP_UNIQUE_ID"));
-//        message.setId(message.randomId());
-//        message.setTimestamp(new Timestamp(System.currentTimeMillis()));
-//        chatService.sendMessage(new ToBeRecieved(new Client(System.getenv("CHATAPP_UNIQUE_ID")),message));
-//        return "redirect:/";
-//    }
-
-    @PostMapping("/savemessage")
+    @PostMapping(value="/savemessage")
     public String saveNewMessage(HttpServletRequest request, @ModelAttribute Message message, Model model){
         chatService.checkEnvironment(request);
         model.addAttribute("message", new Message());
         message.setUsername(chatUserRepo.findOne(chatUserRepo.smallest()).getUserName());
         message.setId(message.randomId());
         message.setTimestamp(new Timestamp(System.currentTimeMillis()));
-        messageRepo.save(message);
+        chatService.sendMessage(new ToBeRecieved(new Client(System.getenv("CHAT_APP_UNIQUE_ID")),message));
         return "redirect:/";
     }
+
+//    @PostMapping("/savemessage")
+//    public String saveNewMessage(HttpServletRequest request, @ModelAttribute Message message, Model model){
+//        chatService.checkEnvironment(request);
+//        model.addAttribute("message", new Message());
+//        message.setUsername(chatUserRepo.findOne(chatUserRepo.smallest()).getUserName());
+//        message.setId(message.randomId());
+//        message.setTimestamp(new Timestamp(System.currentTimeMillis()));
+//        messageRepo.save(message);
+//        return "redirect:/";
+//    }
+
 }

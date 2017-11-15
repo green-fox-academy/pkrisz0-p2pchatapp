@@ -3,11 +3,17 @@ package com.greenfox.pkrisz0.chatapp.service;
 import com.greenfox.pkrisz0.chatapp.model.ChatLog;
 import com.greenfox.pkrisz0.chatapp.model.Status;
 import com.greenfox.pkrisz0.chatapp.model.ToBeRecieved;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Service
 public class ChatService {
@@ -46,6 +52,6 @@ public class ChatService {
 
     public void sendMessage(ToBeRecieved toBeRecieved){
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject("http://localhost:8080/api/message/receive",toBeRecieved,Status.class);
+        Status s = restTemplate.postForObject("http://localhost:8080/api/message/receive",toBeRecieved, Status.class);
     }
 }

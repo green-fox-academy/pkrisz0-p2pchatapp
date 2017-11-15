@@ -48,6 +48,6 @@ public class ChatService {
     public void sendMessage(ToBeRecieved toBeRecieved){
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<ToBeRecieved> httpent = new HttpEntity<>(toBeRecieved);
-        Status s = restTemplate.postForObject("https://pkrisz0chatapp.herokuapp.com/api/message/receive",httpent, Status.class);
+        Status s = restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESSS"),httpent, Status.class);
     }
 }

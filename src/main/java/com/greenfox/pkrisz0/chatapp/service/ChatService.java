@@ -52,6 +52,6 @@ public class ChatService {
 
     public void sendMessage(ToBeRecieved toBeRecieved){
         RestTemplate restTemplate = new RestTemplate();
-        Status s = restTemplate.postForObject("http://localhost:8080/api/message/receive",toBeRecieved, Status.class);
+        Status s = restTemplate.postForObject("https://pkrisz0chatapp.herokuapp.com/api/message/receive",toBeRecieved, Status.class);
     }
 }

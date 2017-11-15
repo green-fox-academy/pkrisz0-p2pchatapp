@@ -61,13 +61,4 @@ public class Message {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "username='" + username + '\'' +
-                ", text='" + text + '\'' +
-                ", timestamp=" + timestamp +
-                ", id=" + id +
-                '}';
-    }
 }
